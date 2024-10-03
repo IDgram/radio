@@ -47,32 +47,6 @@
             padding-bottom: 120px;
         }
     }
-    .aura {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 200px;
-        height: 200px;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(0,128,255,0.5) 0%, rgba(0,128,255,0) 70%);
-        animation: pulse 4s ease-in-out infinite;
-        pointer-events: none;
-    }
-    @keyframes pulse {
-        0% {
-            transform: translate(-50%, -50%) scale(1);
-            opacity: 0.5;
-        }
-        50% {
-            transform: translate(-50%, -50%) scale(1.2);
-            opacity: 0.7;
-        }
-        100% {
-            transform: translate(-50%, -50%) scale(1);
-            opacity: 0.5;
-        }
-    }
     .header {
         display: flex;
         justify-content: space-between;
@@ -80,7 +54,7 @@
         width: 100%;
     }
     .logo {
-        width: 100px;
+        width: 90px;
         object-fit: contain;
     }
     .live-indicator {
@@ -91,31 +65,29 @@
         font-weight: bold;
         font-size: 14px;
     }
-    .station-info {
-        text-align: center;
-        margin-top: 20px;
-        align-items: center;
+    .station-display {
         display: flex;
         flex-direction: column;
+        align-items: center;
+        margin-top: 40px;
     }
-    .station-name {
+    .station-logo-large {
+        width: 200px;
+        height: 200px;
+        border-radius: 20px;
+        object-fit: cover;
+    }
+    .station-name-large {
+        margin-top: 20px;
         font-size: 24px;
         font-weight: bold;
-        color: #fff;
-        margin-bottom: 5px;
-        display: flex;
-        align-items: center;
+        text-align: center;
     }
-    .station-freq {
-        font-size: 16px;
-        font-weight: bold;
-        color: #ffff00;
-        margin-left: 10px;
-    }
-    .frequency {
-        font-size: 72px;
-        font-weight: bold;
+    .station-info-large {
         margin-top: 10px;
+        font-size: 16px;
+        color: #ffff00;
+        text-align: center;
     }
     .tuner {
         position: relative;
@@ -146,14 +118,9 @@
         width: 32px;
         height: 32px;
     }
-    .stack-icon {
-        width: 24px;
-        height: 24px;
-        cursor: pointer;
-        object-fit: contain;
-    }
     .station-list {
         display: none;
+        opacity: 0;
         padding: 20px 20px 120px 20px;
         position: fixed;
         top: 0;
@@ -167,7 +134,6 @@
         overflow: hidden;
         box-sizing: border-box;
         transition: opacity 0.3s ease-in-out;
-        opacity: 0;
     }
     .station-list.show {
         opacity: 1;
@@ -188,36 +154,40 @@
     .station-list-container::-webkit-scrollbar {
         display: none;
     }
-    .station-list-inner {
-    }
     .station-item {
         background-color: rgba(255, 255, 255, 0.1);
         backdrop-filter: blur(10px);
         margin-bottom: 10px;
-        padding: 20px;
+        padding: 15px;
         display: grid;
-        grid-template-columns: 70px 1fr auto;
+        grid-template-columns: auto 1fr auto;
         gap: 15px;
         align-items: center;
         border-radius: 15px;
         cursor: pointer;
-        height: 90px;
-        position: relative;
+        height: auto;
         transition: box-shadow 0.3s ease;
     }
     .station-item:hover {
         box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
     }
+    .station-logo {
+        width: 60px;
+        height: 60px;
+        border-radius: 10px;
+        object-fit: cover;
+    }
     .station-info {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        justify-content: center;
     }
-    .station-country {
-        font-size: 14px;
-        color: #ccc;
+    .station-name {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 5px;
     }
-    .station-genre {
+    .station-freq {
         font-size: 14px;
         color: #ccc;
     }
@@ -285,27 +255,6 @@
             bottom: 10px;
         }
     }
-    .station-logo {
-        width: 70px;
-        height: 70px;
-        border-radius: 10px;
-        object-fit: cover;
-    }
-    .volume-control {
-        display: none;
-    }
-    .volume-slider {
-        display: none;
-    }
-    .volume-slider::-webkit-slider-thumb {
-        display: none;
-    }
-    .saved-stations-grid {
-        display: none;
-    }
-    .saved-station-card {
-        display: none;
-    }
     .popup {
         display: none;
         position: fixed;
@@ -340,94 +289,26 @@
         text-decoration: none;
         cursor: pointer;
     }
-    .playback-bar {
-        position: fixed;
-        bottom: 90px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 90%;
-        max-width: 350px;
-        height: 60px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 20px;
-        padding: 0 10px;
-    }
-    .current-station-logo {
-        width: 50px;
-        height: 50px;
-        border-radius: 10px;
-        object-fit: cover;
-    }
-    .playback-info {
-        flex-grow: 1;
-        margin-left: 10px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-    .current-station-name {
-        font-size: 16px;
-        font-weight: bold;
-    }
-    .current-frequency {
-        font-size: 14px;
-        color: #ffff00;
-    }
-    .favorite-btn {
-        background: none;
-        border: none;
-        color: #fff;
-        cursor: pointer;
-        padding: 5px;
-    }
-    .favorite-btn svg {
-        width: 24px;
-        height: 24px;
-    }
-    .favorite-btn.active svg {
-        fill: #ff0000;
-    }
     .station-item.station-error {
         opacity: 0.5;
         pointer-events: none;
     }
 </style>
 <script src="google-sheets-api.js" defer></script>
-</head>
-<body>
+</head><body>
 <div class="container">
     <div class="header">
-        <img src="https://i.ibb.co/hcYWX0H/logo-afreeradio.png" alt="Radio Logo" class="logo">
+        <img src="https://image.noelshack.com/fichiers/2024/40/5/1727998193-logo-afreeradio.png" alt="Radio Logo" class="logo">
         <div class="live-indicator">
             <span>En direct</span>
         </div>
     </div>
-    <div class="aura"></div>
-    <div class="playback-bar">
-        <img src="/path/to/current-station-logo.png" alt="Current Station Logo" class="current-station-logo">
-        <div class="playback-info">
-            <div class="current-station-name" id="current-station-name">KQED-FM</div>
-            <div class="current-frequency" id="frequency-display">88.5</div>
-        </div>
-        <button class="favorite-btn" id="favorite-btn">
-            <svg viewBox="0 0 24 24" width="24" height="24">
-                <path fill="currentColor" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-            </svg>
-        </button>
-    </div>
-    <div class="station-info">
-        <div class="station-name" id="current-station-name">KQED-FM</div>
-        <div class="frequency" id="frequency-display">88.5</div>
+    <div class="station-display">
+        <img src="/https://image.noelshack.com/fichiers/2024/40/5/1727998394-favicon-afreeradio-blc.png" alt="Station Logo" class="station-logo-large" id="station-logo-large">
+        <div class="station-name-large" id="station-name-large"></div>
+        <div class="station-info-large" id="station-info-large"></div>
     </div>
     <div class="tuner">
-        <div class="dial">
-        </div>
     </div>
 </div>
 
@@ -462,86 +343,6 @@
 <div class="station-list" id="station-list">
     <div class="station-list-container">
         <div class="station-list-inner">
-            <div class="station-item" data-freq="102.9" data-name="KBLX">
-                <img src="/path/to/kblx-logo.png" alt="KBLX Logo" class="station-logo">
-                <div class="station-info">
-                    <span class="station-name">KBLX <span class="station-freq">102.9</span></span>
-                    <span class="station-country"></span>
-                    <span class="station-genre"></span>
-                </div>
-                <button class="play-button">▶</button>
-                <audio src="https://example.com/fallback-stream.mp3"></audio>
-            </div>
-            <div class="station-item" data-freq="103.7" data-name="KKSF">
-                <img src="/path/to/kksf-logo.png" alt="KKSF Logo" class="station-logo">
-                <div class="station-info">
-                    <span class="station-name">KKSF <span class="station-freq">103.7</span></span>
-                    <span class="station-country"></span>
-                    <span class="station-genre"></span>
-                </div>
-                <button class="play-button">▶</button>
-                <audio src="https://example.com/fallback-stream.mp3"></audio>
-            </div>
-            <div class="station-item" data-freq="105.3" data-name="KITS">
-                <img src="/path/to/kits-logo.png" alt="KITS Logo" class="station-logo">
-                <div class="station-info">
-                    <span class="station-name">KITS <span class="station-freq">105.3</span></span>
-                    <span class="station-country"></span>
-                    <span class="station-genre"></span>
-                </div>
-                <button class="play-button">▶</button>
-                <audio src="https://example.com/fallback-stream.mp3"></audio>
-            </div>
-            <div class="station-item" data-freq="106.1" data-name="KMEL">
-                <img src="/path/to/kmel-logo.png" alt="KMEL Logo" class="station-logo">
-                <div class="station-info">
-                    <span class="station-name">KMEL <span class="station-freq">106.1</span></span>
-                    <span class="station-country"></span>
-                    <span class="station-genre"></span>
-                </div>
-                <button class="play-button">▶</button>
-                <audio src="https://example.com/fallback-stream.mp3"></audio>
-            </div>
-            <div class="station-item" data-freq="106.9" data-name="KFRC">
-                <img src="/path/to/kfrc-logo.png" alt="KFRC Logo" class="station-logo">
-                <div class="station-info">
-                    <span class="station-name">KFRC <span class="station-freq">106.9</span></span>
-                    <span class="station-country"></span>
-                    <span class="station-genre"></span>
-                </div>
-                <button class="play-button">▶</button>
-                <audio src="https://example.com/fallback-stream.mp3"></audio>
-            </div>
-            <div class="station-item" data-freq="88.5" data-name="KQED-FM">
-                <img src="/path/to/kqed-fm-logo.png" alt="KQED-FM Logo" class="station-logo">
-                <div class="station-info">
-                    <span class="station-name">KQED-FM <span class="station-freq">88.5</span></span>
-                    <span class="station-country"></span>
-                    <span class="station-genre"></span>
-                </div>
-                <button class="play-button">▶</button>
-                <audio src="https://example.com/fallback-stream.mp3"></audio>
-            </div>
-            <div class="station-item" data-freq="99.7" data-name="KMVQ-FM">
-                <img src="/path/to/kmvq-fm-logo.png" alt="KMVQ-FM Logo" class="station-logo">
-                <div class="station-info">
-                    <span class="station-name">KMVQ-FM <span class="station-freq">99.7</span></span>
-                    <span class="station-country"></span>
-                    <span class="station-genre"></span>
-                </div>
-                <button class="play-button">▶</button>
-                <audio src="https://example.com/fallback-stream.mp3"></audio>
-            </div>
-            <div class="station-item" data-freq="101.3" data-name="KIOI">
-                <img src="/path/to/kioi-logo.png" alt="KIOI Logo" class="station-logo">
-                <div class="station-info">
-                    <span class="station-name">KIOI <span class="station-freq">101.3</span></span>
-                    <span class="station-country"></span>
-                    <span class="station-genre"></span>
-                </div>
-                <button class="play-button">▶</button>
-                <audio src="https://example.com/fallback-stream.mp3"></audio>
-            </div>
         </div>
     </div>
     <button class="close-list" id="close-list">✕</button>
@@ -578,16 +379,6 @@
         alert('Failed to load the radio station. Please try another station.');
     }
 
-    function updatePlaybackBar(stationName, frequency) {
-        if (currentStationName) {
-            currentStationName.textContent = stationName;
-        }
-        
-        if (frequencyDisplay) {
-            frequencyDisplay.textContent = frequency;
-        }
-    }
-
     async function fetchStations() {
         try {
             const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${RANGE}?key=${API_KEY}`);
@@ -600,11 +391,11 @@
             }
             return data.values.slice(1).map(row => ({
                 name: row[0] || '',
-                country: row[1] || '',
-                genre: row[2] || '',
-                streamUrl: row[3] || '',
                 frequency: row[4] || '',
-                logo: row[5] || ''
+                streamUrl: row[3] || '',
+                logo: row[5] || '/path/to/default-logo.png',
+                genre: row[1] || '',
+                country: row[2] || ''
             }));
         } catch (error) {
             console.error('Error fetching stations:', error);
@@ -613,34 +404,35 @@
     }
 
     async function updateStationList() {
+        const stationListInner = document.querySelector('.station-list-inner');
+        if (stationListInner && stationListInner.children.length > 0) {
+            return;
+        }
+
         try {
             const stations = await fetchStations();
             if (stations.length === 0) {
                 console.warn('No stations data available');
                 return;
             }
-            const stationListInner = document.querySelector('.station-list-inner');
-            stationListInner.innerHTML = '';
-
-            stations.forEach(station => {
-                const stationItem = document.createElement('div');
-                stationItem.className = 'station-item';
-                stationItem.dataset.freq = station.frequency;
-                stationItem.dataset.name = station.name;
-
-                stationItem.innerHTML = `
+            
+            stationListInner.innerHTML = stations.map((station, index) => `
+                <div class="station-item" 
+                    data-freq="${station.frequency}" 
+                    data-name="${station.name}" 
+                    data-index="${index}"
+                    data-logo="${station.logo}"
+                    data-genre="${station.genre}"
+                    data-country="${station.country}">
                     <img src="${station.logo}" alt="${station.name} Logo" class="station-logo">
                     <div class="station-info">
-                        <span class="station-name">${station.name} <span class="station-freq">${station.frequency}</span></span>
-                        <span class="station-country">${station.country}</span>
-                        <span class="station-genre">${station.genre}</span>
+                        <span class="station-name">${station.name}</span>
+                        <span class="station-freq">${station.frequency}</span>
                     </div>
                     <button class="play-button">▶</button>
                     <audio src="${station.streamUrl}"></audio>
-                `;
-
-                stationListInner.appendChild(stationItem);
-            });
+                </div>
+            `).join('');
 
             initializeStationItems();
         } catch (error) {
@@ -648,8 +440,22 @@
         }
     }
 
-    setInterval(updateStationList, 5 * 60 * 1000);
     updateStationList();
+
+    function initializeStationItems() {
+        const stationItems = document.querySelectorAll('.station-item');
+        stationItems.forEach((item) => {
+            const playButton = item.querySelector('.play-button');
+            if (playButton) {
+                playButton.addEventListener('click', () => {
+                    playStation(item);
+                    if (stationList) {
+                        stationList.style.display = 'none';
+                    }
+                });
+            }
+        });
+    }
 
     function getStationItems() {
         return document.querySelectorAll('.station-item');
@@ -662,7 +468,21 @@
             const itemFreq = parseFloat(item.dataset.freq);
             if (Math.abs(itemFreq - freq) < 0.1) {
                 item.classList.add('active-station');
-                updatePlaybackBar(item.dataset.name, freq);
+
+                const stationLogoLarge = document.getElementById('station-logo-large');
+                const stationNameLarge = document.getElementById('station-name-large');
+                const stationInfoLarge = document.getElementById('station-info-large');
+                if (stationLogoLarge) {
+                    stationLogoLarge.src = item.dataset.logo || '/path/to/default-logo.png';
+                    stationLogoLarge.alt = `${item.dataset.name} Logo`;
+                }
+                if (stationNameLarge) {
+                    stationNameLarge.textContent = item.dataset.name;
+                }
+                if (stationInfoLarge) {
+                    stationInfoLarge.textContent = `${item.dataset.genre} • ${item.dataset.country}`;
+                }
+
                 foundStation = true;
                 currentStationIndex = index;
             } else {
@@ -670,7 +490,19 @@
             }
         });
         if (!foundStation) {
-            updatePlaybackBar(freq + " MHz", freq);
+            const stationLogoLarge = document.getElementById('station-logo-large');
+            const stationNameLarge = document.getElementById('station-name-large');
+            const stationInfoLarge = document.getElementById('station-info-large');
+            if (stationLogoLarge) {
+                stationLogoLarge.src = '/path/to/default-logo.png';
+                stationLogoLarge.alt = 'Default Station Logo';
+            }
+            if (stationNameLarge) {
+                stationNameLarge.textContent = freq + " MHz";
+            }
+            if (stationInfoLarge) {
+                stationInfoLarge.textContent = '';
+            }
         }
     }
 
@@ -687,11 +519,18 @@
     }
 
     function playStation(stationItem) {
-        const freq = stationItem.dataset.freq;
-        const name = stationItem.dataset.name;
-        const streamUrl = stationItem.querySelector('audio').src;
+        const stationIndex = parseInt(stationItem.dataset.index, 10);
+        
+        const station = {
+            frequency: parseFloat(stationItem.dataset.freq),
+            name: stationItem.dataset.name,
+            logo: stationItem.dataset.logo || '/path/to/default-logo.png',
+            streamUrl: stationItem.querySelector('audio').src,
+            genre: stationItem.dataset.genre || '',
+            country: stationItem.dataset.country || ''
+        };
 
-        audio.src = streamUrl;
+        audio.src = station.streamUrl;
         audio.onerror = handleAudioError;
 
         audio.play().catch(error => {
@@ -700,8 +539,21 @@
 
         isPlaying = true;
         updatePlayPauseButton();
-        updatePlaybackBar(name, freq);
-        updateActiveStation(parseFloat(freq));
+        updateActiveStation(parseFloat(station.frequency));
+
+        const stationLogoLarge = document.getElementById('station-logo-large');
+        const stationNameLarge = document.getElementById('station-name-large');
+        const stationInfoLarge = document.getElementById('station-info-large');
+        if (stationLogoLarge) {
+            stationLogoLarge.src = station.logo;
+            stationLogoLarge.alt = `${station.name} Logo`;
+        }
+        if (stationNameLarge) {
+            stationNameLarge.textContent = station.name;
+        }
+        if (stationInfoLarge) {
+            stationInfoLarge.textContent = `${station.genre} • ${station.country}`;
+        }
     }
 
     function togglePlayPause() {
@@ -722,21 +574,16 @@
             : '<svg viewBox="0 0 24 24" width="32" height="32"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>';
     }
 
-    const frequencyDisplay = safeQuerySelector('#frequency-display');
-    const currentStationName = safeQuerySelector('#current-station-name');
     const stationList = safeQuerySelector('#station-list');
     const closeList = safeQuerySelector('#close-list');
     const shareBtn = safeQuerySelector('#share-btn');
     const prevBtn = safeQuerySelector('#prev-btn');
     const nextBtn = safeQuerySelector('#next-btn');
     const radioBtn = safeQuerySelector('#radio-btn');
-    const favoriteBtn = safeQuerySelector('#favorite-btn');
-    let isFavorite = false;
 
     function shareStation() {
-        const currentStation = currentStationName ? currentStationName.textContent : '';
-        const currentFrequency = frequencyDisplay ? frequencyDisplay.textContent : '';
-        const shareText = `I'm listening to ${currentStation} (${currentFrequency}) on Radio Épurée!`;
+        const currentStation = safeQuerySelector('#station-name-large') ? safeQuerySelector('#station-name-large').textContent : '';
+        const shareText = `I'm listening to ${currentStation} on Radio Épurée!`;
         const shareUrl = encodeURIComponent(window.location.href);
         
         if (navigator.share) {
@@ -755,85 +602,32 @@
     }
 
     safeAddEventListener(shareBtn, 'click', shareStation);
-    safeAddEventListener(favoriteBtn, 'click', () => {
-        isFavorite = !isFavorite;
-        favoriteBtn.classList.toggle('active', isFavorite);
-
-        const currentStation = currentStationName ? currentStationName.textContent : '';
-        const currentFrequency = frequencyDisplay ? frequencyDisplay.textContent : '';
-
-        if (isFavorite) {
-            console.log(`Added ${currentStation} (${currentFrequency}) to favorites`);
-        } else {
-            console.log(`Removed ${currentStation} (${currentFrequency}) from favorites`);
-        }
-    });
-
     safeAddEventListener(prevBtn, 'click', playPreviousStation);
     safeAddEventListener(nextBtn, 'click', playNextStation);
     safeAddEventListener(safeQuerySelector('#play-pause-btn'), 'click', togglePlayPause);
-    safeAddEventListener(radioBtn, 'click', () => {
-        if (stationList) {
-            stationList.style.display = 'flex';
-            setTimeout(() => {
-                stationList.classList.add('show');
-            }, 10);
-        }
-    });
-
-    function initializeStationItems() {
-        const stationItems = getStationItems();
-        stationItems.forEach((item) => {
-            const playButton = item.querySelector('.play-button');
-            if (playButton) {
-                playButton.addEventListener('click', () => {
-                    playStation(item);
-                    if (stationList) {
-                        stationList.classList.remove('show');
-                        setTimeout(() => {
-                            stationList.style.display = 'none';
-                        }, 300);
-                    }
-                });
-            }
-            
-            const audioElement = item.querySelector('audio');
-            if (audioElement) {
-                audioElement.onerror = () => {
-                    console.error(`Failed to load audio for station: ${item.dataset.name}`);
-                    item.classList.add('station-error');
-                };
+    
+    if (radioBtn) {
+        radioBtn.addEventListener('click', () => {
+            const stationList = document.getElementById('station-list');
+            if (stationList) {
+                stationList.style.display = 'flex';
+                setTimeout(() => {
+                    stationList.classList.add('show');
+                }, 10);
             }
         });
     }
 
-    closeList.addEventListener('click', () => {
+    function hideStationList() {
+        const stationList = document.getElementById('station-list');
         if (stationList) {
             stationList.classList.remove('show');
             setTimeout(() => {
                 stationList.style.display = 'none';
             }, 300);
         }
-    });
-
-    const aura = document.querySelector('.aura');
-
-    function updateAura(event) {
-        const x = event.clientX / window.innerWidth;
-        const y = event.clientY / window.innerHeight;
-
-        const hue = Math.floor((x + y) * 180);
-        const size = 150 + Math.floor((x + y) * 100);
-
-        aura.style.background = `radial-gradient(circle, hsla(${hue}, 100%, 50%, 0.5) 0%, hsla(${hue}, 100%, 50%, 0) 70%)`;
-        aura.style.width = `${size}px`;
-        aura.style.height = `${size}px`;
     }
 
-    document.addEventListener('mousemove', updateAura);
-
-    updateStationList().then(() => {
-        initializeStationItems();
-    });
+    closeList.addEventListener('click', hideStationList);
 </script>
 </body></html>
